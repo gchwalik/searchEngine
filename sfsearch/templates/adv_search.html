@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+<h1 style="font-weight:normal; color:#000;"><a href="{{ url_for('login') }}">Search Engine</a> / Advanced Search</a></h1>
+  <form action="{{ url_for('advSearch') }}" method=post>
+  <table style="position:relative; left:75px;">
+    <tr>
+      <td>
+        <h3 style="padding-top: 15px;">Advanced Search:</h3>  
+      </td>
+    </tr>
+    <tr>
+      <td valign="bottom">
+        <table width="450px">
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="title">Title:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="title" size="30">
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="author">Author:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="author" size="30">
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="year">Year:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="year" size="30">
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="project">Project Number:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="proj_num" size="30">
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="keyword">Keyword:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="keyword" size="30"> 
+          <td>
+        </tr>
+        </table>
+      </td>
+      <td valign="bottom" halign="left">
+        <input type="submit" value="Submit">  
+      <td>    
+    </table>
+  </form>
+{% endblock %}

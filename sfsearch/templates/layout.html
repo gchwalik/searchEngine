@@ -1,0 +1,73 @@
+<!doctype html>
+<title>Search</title>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}"/>
+
+<div class=header>
+  <div class=wrap>
+    <a title="Homepage of UC Davis Superfund" href="http://www-sf.ucdavis.edu/">
+      <img style="margin: 13px 6px;" src="{{ url_for('static', filename='images/logo.png') }}"/>
+    </a>
+  </div>
+  <div class=wrap style="vertical-align:middle"> 
+
+    <!-- changed margin: 30px 10px 20px to margin:50px 10px 20px -->
+    <a title="Homepage of UC Davis Superfund" href="http://www-sf.ucdavis.edu/">
+      <p style="margin: 50px 10px 20px"><span style="font-family: enriqueta,serif; line-height:1em;"><span style="font-weight:bold;font-size:18px; color:rgb(96,96,96);">
+        University of California Davis</span></br></br>
+        <span style="font-size:36px;">Superfund Research Program</span> 
+      </p></span>
+    </a>
+<!--    <nav>
+      <ul>
+        <li><a style="margin-left:10px; margin-right:40px; padding-bottom:20px;"  href="#">HOME</a>
+          <ul style="margin-left:-2px;">
+          
+            <li><a href="#">About</s></li>
+          </ul></li>
+        <li><a style="margin-right:40px; padding-bottom:20px;" href='#'>RESEARCH</a>
+          <ul style="margin-left:-118px;">
+            <li><a href='#'>Project 1 - Transport and Remediation</a></li>
+            <li><a href='#'>Project 2 - Biosensors</a></li>
+            <li><a href='#'>Project 3 - Immunochemical Biomarkers</a></li>
+            <li><a href='#'>Project 4 - Pulmonary Biomarkers</a></li>
+            <li><a href='#'>Project 5 - Cell-Based Bioassays</a></li>
+            <li><a href='#'>Project 6 - Reproductive Biomarkers</a></li>
+            <li><a href='#'>Project 7 - Nanoscale Particle REmediation</a></li>
+            <li><a href='#'>Core A - Analytical Chemistry</a></li>
+            <li><a href='#'>Core B - Proteomic</a></li>
+            <li><a href='#'>Core C - Training</a></li>
+            <li><a href='#'>Core D - Research Translation</a></li>
+            <li><a href='#'>Core E - Administration</a></li>
+          </ul></li>
+        <li><a style="margin-right:40px; padding-bottom:20px;" href='#'>NEWS</a></li> 
+        <li><a style="margin-right:40px; padding-bottom:20px;" href='#'>OUR TEAM</a>
+          <ul style="margin-left:-18px">
+            <li><a href='#'>Investigators</a></li>
+            <li><a href='#'>Trainees</a></li>
+            <li><a href='#'>Staff</a></li>
+          </ul></li>
+        <li><a style="margin-right:40px; padding-bottom:20px;" href='#'>PUBLICATIONS</a></li>
+        <li><a style="padding-right:0; padding-bottom:20px;" href='#'>RESOURCES</a>
+          <ul style="margin-left:-85px">
+            <li><a style="white-space:nowrap;" href='#'>Community Engaged Research</a></li>
+            <li><a style="white-space:nowrap;" href='#'>Science Communication Resources</a></li>
+            <li><a style="white-space:nowrap;" href='#'>UC Davis Assays</a></li>
+            <li><a style="white-space:nowrap;" href='#'>Mass Spec Lab</a></li>
+            <li><a style="white-space:nowrap;" href='#'>Logos and Resources</a></li>
+            <li><a style="white-space:nowrap;" href='#'>Links</a></li>
+        </ul>  </li>
+      </ul>
+    </div>
+  </nav> -->
+</div>
+
+<div class=page></br>
+
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %} 
+  {% block body %}{% endblock %}
+</div>

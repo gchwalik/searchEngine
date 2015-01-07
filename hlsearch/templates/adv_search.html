@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('advSearch') }}" method=post>
+
+  <table align="center">
+    <tr>
+      <td>
+        <h3></br>Advanced Search:</h3>  
+      </td>
+    </tr>
+    <tr>
+      <td valign="bottom">
+        <table width="420px">
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="title">Title:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="title" style="width:300px"> 
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="author">Author:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="author" style="width:300px">
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="year">Year:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="year" style="width:300px">
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="project">Research Category:</label>
+          </td>
+          <td valign="center">
+          <select name="proj_num" id="proj_num" style="width:305px">
+            <option value="">All</option> 
+            <option value="Epoxide Hydrolase">Epoxide Hydrolase</option> 
+            <option value="Esterase and Amidase">Esterase and Amidase</option>
+            <option value="Immunoassay">Immunoassay</option>
+            <option value="Insect Biology">Insect Biology</option>
+            <option value="">- - -</option>
+            <option value="Cancer">EH - Cancer</option>
+            <option value="Sorafenib">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EH - Sorafenib</option>
+            <option value="Cardiovascular">EH - Cardiovascular</option>
+            <option value="Hypertension">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EH - Hypertension</option>
+            <option value="Diabetes">EH - Diabetes</option>
+            <option value="EH Review Articles">EH - EH Review Articles</option>
+            <option value="Eicosanoid Biology">EH - Eicosanoid Biology</option>
+            <option value="Fibrosis">EH - Fibrosis</option>
+            <option value="Atrial Fibrosis">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EH - Atrial Fibrosis</option>
+            <option value="Cardiac Hypertrophy">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EH - Cardiac Hypertrophy</option>
+            <option value="General Fibrosis">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EH - General Fibrosis</option>
+            <option value="Pulmonary Indications">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EH - Pulmonary Indications</option>
+            <option value="Inflammation">EH - Inflammation</option>
+            <option value="Inhibitor Technology">EH - Inhibitor Technology</option>
+            <option value="Medicinal Chemistry">EH - Medicinal Chemistry</option>
+            <option value="Pain">EH - Pain</option>
+            <option value="Renal Disease">EH - Renal Disease</option>
+            <option value="Nanobodies">IA - Nanobodies</option>
+          </select>
+
+          <td>
+        </tr>
+        <tr>
+          <td valign="center">
+            <label for="keyword">Keyword:</label>
+          </td>
+          <td valign="center">
+            <input type="text" name="keyword" style="width:300px">
+          <td>
+        </tr>
+        </table>
+      </td>
+      <td valign="bottom" halign="left">
+        <input type="submit" value="Submit">  
+      <td>    
+    </table>
+  </form></br>
+{% endblock %}

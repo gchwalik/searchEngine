@@ -1,0 +1,94 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Enriqueta);
+
+body            { font-family: sans-serif; background: #eae5e5; }
+a, h1, h2       { color: #3cb2b2; }
+h1, h2, h3      { font-family: 'Open Sans','Arial', sans-serif; margin: 0; }
+h1              { border-bottom: 4px; solid #eae5e5; padding:2px; font-size:2em;}
+h2              { font-size: 1em; }
+h3		{ font-size: 1.5em; font-weight:normal; }
+a:link		{ text-decoration:none; }
+a:visited	{ text-decoration:none; }
+a:hover		{ color:#287676; text-decoration:none; }
+a:active	{ color:#000; text-decoration:none; }
+
+.text 		{ font-size: 1em;}
+.text a 	{ display: none; }
+.text a:hover 	{ display: block; }
+
+.header		{ width: 55em; margin: 0 auto; }
+.page           { clear:both; margin: 2em auto; width: 55em; }
+.wrap		{ float:left; }
+
+nav ul {
+    padding:0;
+    margin-top:-1px;
+    margin-left:0;
+    list-style: none;
+    position: relative;
+    display:inline-block;
+    }
+     
+nav ul li {
+    float:left;
+    display:list-item;
+    list-style: none;
+    background-color:#eae5e5;
+    }
+  
+nav ul li a {
+    display:block;
+    color:#3CB2B2; 
+    font-size:14px;
+    font-weight:900;
+    font-family:'Open Sans','Arial',sans-serif;
+    text-decoration:none;
+}
+  
+li a:hover { text-decoration:none;
+             color:#287676; }
+
+li a:active { text-decoration:none; color:#000000; }
+
+/* The Dropdown Styles */
+/* =================== */
+  
+/* Hide Dropdowns by Default */
+nav ul ul {
+    display: none;
+    position: absolute; top: 36px;
+//   -webkit-border-radius: 7px;
+ //  -moz-border-radius: 7px;
+  //  border-radius: 7px;
+    box-shadow:0 1px 4px 1px #888888;
+    z-index:9999;
+}
+    
+ 
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+    display:block;
+}
+     
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+    text-align:center;
+    float:none;
+    padding:8px 15px;
+    position: relative;
+    border-bottom:none;
+    background: #F3F1F1;
+ //   box-shadow: 2px 2px 2px 2px #888888;
+}
+  
+
+.entries        { list-style: none; margin: 0; padding: 0; }
+.entries li     { margin: 0.8em 1.2em; }
+.entries li h2  { margin-left: -1em; }
+.add-entry      { font-size: 0.9em; border-bottom: 1px solid #ccc; }
+.add-entry dl   { font-weight: bold; }
+.metanav        { text-align: right; font-size: 0.8em; padding: 0.3em;
+                  margin-bottom: 1em;  }
+.flash          { background: #CEE5F5; padding: 0.5em;
+                  border: 1px solid #AACBE2; }
+.error          { background: #F0D6D6; padding: 0.5em; }

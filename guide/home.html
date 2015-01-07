@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+p {margin:0;padding:0;}
+</style>
+</head>
+
+
+<body>
+<div style="width: 700px; margin-left: auto;margin-right: auto;
+background: #eee; padding:2em">
+<h1 style="text-align:center">GIT/HEROKU GUIDE<h1>
+
+<h3>Table of contents</h3>
+
+<ul>
+  <li><a href="#one">The Heroku Toolbelt</a></li>
+  <li><a href="#two">Git for Windows</a></li>
+  <li><a href="#three">Installing SQLite</a></li>
+  <li><a href="#four">Grabbing Remote Github Files</a></li>
+  <li><a href="#five">Creating/Editing Your Database</a></li>
+  <li><a href="#six">Converting your Database to SQL</a></li>
+  <li><a href="#seven">Uploading to Heroku</a></li>
+</ul>
+
+</br>
+<p>This guide is designed be used by people with little to no experience with git or Heroku 
+(or programming really). It can be used to create a new app or to maintain an existing one. 
+Specifically, it deals with the documentation for my database search engine, which can be 
+found here:</p>
+<a style="display:block;text-align:center" href="https://github.com/veggielover77/searchEngine">
+https://github.com/veggielover77/searchEngine</a>
+
+<p>Many of the commands here can be easily applied to other projects, and this guide has 
+collected several commands which I had to search to find. </p>
+<p>For now, this guide deals exclusively with Windows, but once you have the respective tools 
+installed, the bash commands are the same. </p>
+
+<h3>What you will need:</h3>
+<ol>
+  <li>The Heroku Toolbelt
+  <li>Git for Windows
+  <li>SQLite3 
+  <li>The App You Want to Upload
+</ol>
+
+<p>Before we start installing or working on anything, we want to first have at least a 
+folder/directory for the project that we are working on. </p></br>
+
+<p>If you do not already have the project files on your computer, then you'll want to create 
+a folder to contain them. For example, I'm creating a folder called 'searchEngine' on my 
+desktop. </p></br>
+<img class="displayed" src="desktop.png" style="display:block; margin:auto; width:350px"/></br>
+<p>Now that we've taken the first step, let's start installing the tools that we will need 
+to build our project.</p></br></br>
+
+
+
+<h2 id="one">THE HEROKU TOOLBELT</h2>
+<p>If you are not a Windows developer, then you have probably rarely used or 
+even seen a terminal in Windows. You might have experience with PuTTY or Cygwin, 
+both tools which allow you to use a Linux terminal on Windows, but we won't be 
+using them here. I found it much easier to use the following tools, but you can 
+adapt the following steps to your needs.</p></br>
+
+<p>To start, we will need to install the <a href="https://toolbelt.heroku.com/windows" target="blank">
+Heroku Toolbelt for Windows</a>. Taken from Heroku's about page, they describe 
+themselves as</p>
+<blockquote>
+Heroku (pronounced her-OH-koo) is a cloud application platform -- a new way of building 
+and deploying web apps.</br></br>
+Our service lets app developers spend their time on their application code, not 
+managing servers, deployment, ongoing operations, or scaling.</blockquote>
+
+Currently the homepage looks like this:</p></br>
+
+<img class="displayed" src="image1.png" style="display:block; margin:auto; width:700px" /></br>
+
+<p>Make sure you have selected the version for Windows, then go ahead and download it.</p></br>
+
+<img class="displayed" src="image2.png" style="display:block; margin:auto; width:700px" /></br>
+<p>Open and run the downloaded executable, giving it permission to make changes 
+your computer if it asks.</p></br>
+<p>This will take you to the following screen.</p></br>
+<img class="displayed" src="image3.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Go ahead and hit 'Next'.</p></br>
+<img class="displayed" src="image4.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Go ahead and hit 'Next' again; the (x86) lets you know that this program is 
+a 32-bit program.</p></br>
+<img class="displayed" src="image5.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Do the full installation. It's easier than the custom installation, unless 
+you know what you're doing.</p></br>
+<img class="displayed" src="image6.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Hit 'Install', and it will install the entire Heroku Toolbelt: the Heroku 
+Client, Foreman, and Git and SSH.</p></br>
+<img class="displayed" src="image7.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Hit 'Finish' and you're done! You've installed the Herkoku Toolbelt!</p></br></br>
+
+
+<h2 id="two">GIT FOR WINDOWS</h2>
+<p>Now that you've installed the tools to connect with Heroku, you'll need to install 
+<a href="http://msysgit.github.io/" target="blank">Git for Windows</a>. Taken from the Wikipedia 
+page on Git (software):</p>
+<blockquote>
+Git is a distributed revision control and source code management (SCM) 
+system with an emphasis on speed, data integrity, and support for 
+distributed, non-linear workflows... Git was initially designed and 
+developed by Linus Torvalds for Linux kernel development in 2005, and has since 
+become the most widely adopted version control system for software development.</br>
+</br>
+
+As with most other distributed revision control systems, and unlike most 
+client-server systems, every Git working directory is a full-fledged repository 
+with complete history and full version tracking capabilities, independent of network 
+access or a central server. Like the Linux kernel, Git is free software...
+</blockquote>
+
+The homepage currently looks 
+like this:</p></br>
+<img class="displayed" src="gitwebsite.png" style="display:block; margin:auto; width:700px" /></br>
+<p>You are welcome to poke around the website a bit and see Git for Windows is all 
+about, but all you have to do if click on 'Download' to move on. Protip: If you mouse 
+over the orange icon, it changes color to look like the Windows logo.</p></br>
+<img class="displayed" src="gitwebsite2.png" style="display:block; margin:auto; width:700px" /></br>
+<p>So, run the downloaded executable, giving it permission to run if you have those 
+security features built in. This is what the executable looks like for me:</p></br>
+<img class="displayed" src="git1.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Hit 'Next' to get started. </p></br>
+<img class="displayed" src="git2.png" style="display:block; margin:auto; width:375px" /></br>
+<p>This screen is just telling us about the license. You can read it if you want; 
+mostly it talks about the fact that this is free software. The definition for this 
+has been taken from <a href="https://www.gnu.org/philosophy/free-sw.html" target="blank">
+https://www.gnu.org/philosophy/free-sw.html</a>:</p>
+<blockquote>"Free software" means software that respects users' freedom and community. 
+Roughly, it means that the users have the freedom to run, copy, distribute, study, 
+change and improve the software. Thus, "free software" is a matter of liberty, not 
+price. To understand the concept, you should think of "free" as in "free speech," not 
+as in "free beer."</blockquote>
+<p>The rest of the license mostly goes through talking about when you can share/edit 
+it and redistribution laws and the like. Also it's copyrighted so don't put your own 
+name on it.</p></br>
+<p>Anyway, hit 'Next' to move on.</p></br>
+<img class="displayed" src="git3.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Again it just tells us it's installing the files under 'Program Files (x86)'. 
+They're stored here--out of the way--so you don't change them on accident. Hit 'Next' 
+to move on.</p></br>
+<img class="displayed" src="git4.png" style="display:block; margin:auto; width:375px" /></br>
+<p>In this window, make sure you select 'Simple context menu'; this will include 
+'Git Bash Here' and 'Git GUI Here'. 'Git Bash Here' is the bash window that we will 
+be using to execute our commands. GUI (pronounced gooey) means graphical user interface, 
+and will allow you to go through the same commands using a window like the installation 
+window. This guide specifically uses the bash command line.</p></br>
+
+<p>In a little more detail (taken from the Wikipedia page on Bash (Unix shell)</p>
+<blockquote>
+Bash is a Unix shell written by Brian Fox for the GNU Project as a free software 
+replacement for the Bourne shell (sh). Released in 1989, it has been distributed 
+widely as the shell for the GNU operating system and as a default shell on Linux 
+and Mac OS X. It has been ported to Microsoft Windows and distributed with Cygwin 
+and MinGW, to DOS by the DJGPP project, to Novell NetWare and to Android via 
+various terminal emulation applications.</br></br>
+
+Bash is a command processor, typically run in a text window, allowing the user to 
+type commands which cause actions. Bash can also read commands from a file, called 
+a script... The name itself is an acronym, a pun, and a description. As an acronym, it stands 
+for Bourne-again shell, referring to its objective as a free replacement for the 
+Bourne shell.</blockquote>
+
+<p> As far as everything else, I don't like having extra icons on my desktop or start 
+menu, I don't care about a TrueType font, and we want to two 'Associate...' options. If 
+you want, you can add icons or mess with the font, then hit 'Next'.<p></br>
+<img class="displayed" src="git5.png" style="display:block; margin:auto; width:375px" /></br>
+<p>If you don't want to create a Start Menu folder, then make sure to click that box.
+(I'd recommend creating the Start Menu folder, so it's easy to find the program when you 
+want to run it.) Hit 'Next'.</p></br>
+<img class="displayed" src="git6.png" style="display:block; margin:auto; width:375px" /></br>
+<p>I like the 'Use Git from Git Bash only' option. I don't use the Windows Command Prompt 
+if I can help it, because a lot of the Windows commands are different than the Linux ones. 
+I'm not a Windows developer, and assuming that you aren't either, the first option is 
+really all you need. Hit 'Next'.</p></br>
+<img class="displayed" src="git7.png" style="display:block; margin:auto; width:375px" /></br>
+<p>I use PuTTY, so I think my window will look different than yours if you don't. However 
+'Use OpenSSH'--which looks like the default option--is the easiest choice. Make sure it is 
+selected and hit 'Next'.</p></br>
+<img class="displayed" src="git8.png" style="display:block; margin:auto; width:375px" /></br>
+<p>Windows and Unix operating systems encode line breaks differently; Windows uses CRLF 
+(carriage return, line feed) and Unix uses LF (line feed). Since all of the files for 
+the search engine were originally written in Linux we don't want any conversions happening, 
+especially since we will be constructing/editing the database with Git Bash. Select the 
+second option, then hit 'Next'.</p></br>
+<p>Now we're installing Git for Windows! Let it run through the installation process. 
+When it is finished, it will display this window:</p></br>
+<img class="displayed" src="git9.png" style="display:block; margin:auto; width:375px" /></br>
+<p>You can look at the release notes if you want, I peeked at them my first time 
+installing, but it's not necessary. Make sure you uncheck that box if you don't want 
+the file to open. </p></br>
+<p>Hit 'Finish' and you're done! You've installed Git for Windows! You'll notice that in 
+the Start Menu (if you didn't check the box preventing this) there should now appear a 
+folder for 'Git' under 'All Programs'. If you expand 'Git', you should see 'Git Bash' 
+and 'Git GUI'. Git Bash will be the tool we will be using for the rest of this 
+tutorial.</p></br></br>
+
+
+<h2 id="three">INSTALLING SQLITE3</h2>
+<p>In order to compile the changes that you make to the database, you are going to also 
+need <a href="http://www.sqlite.org/download.html" target="blank">SQLite3</a>. Open the link, scroll 
+down to <i>Precompiled Binaries for Windows</i>, and download the file 
+<code>sqlite-shell-win32-*.zip</code>. The * here is used in bash commands to mean anything, 
+so your file name will differ from this, but it should start with sqlite-shell-win32 
+and end with .zip.</p></br>
+<p>Unzip the file you just downloaded into your project folder (mine is searchEngine on 
+my desktop). Now your project folder should contain <b>sqlite.exe</b>. This means that only from 
+this folder we can run SQLite3 commands, if you want to be able to run them from different
+folders, just put copies of the executable into whichever folders you want.</p></br></br>
+
+
+<h2 id="four">GRABBING REMOTE GITHUB FILES</h2>
+<p>I'm assuming that you are working with the database search engine app that I wrote. 
+If you have your own app all ready to go, then just jump down to 
+<a href="#seven">Uploading to Heroku</a>; the same commands we will use for 
+uploading you can use as well. Most (if not all) of them should transfer over 
+from Windows to Linux.</p></br>
+
+<p>Through the rest of this tutorial, I am going to be working with updating the 
+Superfund database. I include the information for both the Biopest and Superfund 
+search engines, but my examples will only reflect Superfund.</p>
+
+<p>In either case open Git for Windows or another Bash consol to move on.</p></br>
+<img class="displayed" src="gitTerminal.png" style="display:block;margin:auto; width:450px"/></br>
+
+<p>Then, in Git Bash, which should look something like the above when first opened, we 
+are going to move into the folder (directory) that we have created.</p></br>
+<p>Through the rest of this tutorial, anytime there is code that you should type into 
+the consol, it will look like this:</p>
+<p style="text-align:center"><code>hello world sample code</code></p></br></br>
+
+<hr></br>
+
+<p>The very first thing we want to do is set up your git
+username and email. It's okay if you don't actually have a git 
+account, a dummy name and email will do. If you run the commands</p>
+<p style="text-align:center"><code>git config --global user.name</code></p>
+<p style="text-align:center"><code>git config --global user.email</code></p>
+you should see the name and email you have assigned to yourself. If this is your
+first time going through this tutorial, you will get back a blank line
+for each. 
+</br></br>
+
+To set up your name and email run the commands</p>
+<p style="text-align:center"><code>git config --global user.name
+somebody</code></p>
+<p style="text-align:center"><code>git config --global user.email
+sombody@somewhere</code></p>
+<p>You could literally copy the above commands, since even placeholders
+will do, but it is nice to use your own name and email.</p></br>
+
+<p>Rerun</p>
+<p style="text-align:center"><code>git config --global user.name</code></p>
+<p style="text-align:center"><code>git config --global user.email</code></p>
+<p>to see the name and email you picked for yourself.</p></br>
+
+<hr></br>
+
+<p>Right now, we are positioned at home, which is to say that we are currently sitting 
+in your user home folder. Thinking of it in terms of Windows Explorer, my home position 
+looks like this:</p></br>
+<img class="displayed" src="explorer.png" style="display:block; margin:auto; width:375px" /></br>
+
+<p>To test your location, you can type</p>
+<p style="text-align:center"><code>ls</code></p>
+<p>into the terminal.</p></br>
+
+<img class="displayed" src="gitTerminal2.png" style="display:block; margin:auto; width:450px" />
+</br>
+<p>If you hit enter, you should get a list of files and directories (folders). Most of 
+these should match up to your home folder. For me, I got a bunch of extra hidden
+or temporary files.</p></br>
+
+<p><code>ls</code> is the command for 'list'. When you execute it, you are asking the 
+terminal to list all of the files in the current directory. Now you will want to change 
+directory (or cd) into the folder where you want to store the project; this should be 
+where you just created a folder.  By default it won't color files differently than 
+directories, but if you type</p>
+<p style="text-align:center"><code>alias ls='ls --color=auto -aX'</code></p>
+<p>then it will every time you type <code>ls</code>. (<code>-aX</code> tells it to list 
+all files (incl. hidden ones) in alphabetical order). However, when you restart Git Bash, 
+you'll have to retype that command. Files should still be white, but directories will 
+show as blue, and other file types as different colors.</p></br>
+<p>To make this change permanent, type the following:</p>
+<table style="margin-left:auto; margin-right:auto;">
+<tr>
+<td style="padding-right:5px"><code>vim .bashrc.</code></td>
+<td style="padding-left:5px;"> (creates a file called .bashrc and opens an editor, </br>
+&nbsp;&nbsp;don't forget the extra period)</td>
+</tr>
+<tr>
+<td style="padding-right:5px;"><code>i</code></td>
+<td style="padding-left:5px;">(enters insert mode so you can edit the file)</td>
+</tr>
+<tr>
+<td style="padding-right:5px;"><code>alias ls='ls --color=auto -aX</code></td>
+<td style="padding-left:5px;">(write directly into this file)</td>
+</tr> </table></br>
+<p>Then hit the <code>Esc</code> key, then</p>
+<table style="margin-left:auto; margin-right:auto;">
+<tr>
+<td style="padding-right:5px;padding-left:5px"><code>:wq</code></td>
+<td style="padding-right:5px;padding-left:5px">(tells it to save and then quit)</td>
+</table></br>
+<p>So now, if you close and reopen Git Bash, <code>ls</code> will still color your 
+different file types.</p></br>
+
+<p>Since I created my folder on my desktop, I can type</p>
+<p style="text-align:center"><code>cd Desktop</code></p>
+<p style="text-align:center"><code>cd searchEngine</code></p></br>
+
+<p>If you know the exact path you want to take,  you could type</p>
+<p style="text-align:center"><code>cd Desktop/searchEngine</code></p></br>
+
+<p>The forward slash denotes that searchEngine is a child folder of Desktop. You could 
+use the forward slash for as many folders as you want</p>
+<p style="text-align:center"><code>cd Documents/SuperFund/Superfund\ Publications/4-2014</code></p>
+<p>It's important to escape any spaces (or special characters) in your file/directory 
+names with a backslash just before them (as in  Superfund\ Publications).</p></br></br>
+
+<p>Wherever you are, a period <code>.</code> will represent your current directory, or 
+where you are currently located. So if you type</p>
+<p style="text-align:center"><code>cd .</code></p>
+<p>nothing will happen.</p></br>
+
+<p>Likewise, wherever you are, a double period <code>..</code> represents the parent 
+folder to the one you're currently in. So if you accidentally enter the wrong folder, 
+you can type</p>
+<p style="text-align:center"><code>cd ..</code></p>
+<p>to go back up one folder.</p></br> 
+
+<p>If you accidentally went into the wrong folder, you could type</p>
+<p style="text-align:center"><code>cd ../correct_folder</code></p>
+<p>to get into the correct one (substituting <code>correct_folder</code> for the one you want).
+</p></br>
+
+<p>Just typing</p>
+<p style="text-align:center"><code>cd</code></p>
+<p>by itself will take you back to your home folder.</p></br>
+
+<p>If you ever forget where you are you can type 
+<p style="text-align:center;"><code>pwd</code></p>
+<p>to "print the working directory."</p></br>
+
+<hr></br>
+
+<p>So now you should be in the directory (folder) where you want to store the project files.</p> 
+</br>
+
+<p>To copy the files from my Github to your local directory type</p>
+<p style="text-align:center;"><code>
+git clone https://github.com/veggielover77/searchEngine.git . 
+</code></p>
+<p>Make sure you don't forget the period at the end; there is a space and a period.</p></br>
+</br>
+
+<p>If you are updating the files from your own Heroku account, you'll want to use
+<p style="text-align:center;"><code>
+git clone git@heroku.com:PROJECT_NAME.git . 
+</code></p>
+where PROJECT_NAME is the name of the specific search engine you are working with. In the case of the UC Davis Superfund Divison or Biopest Lab, it will be either <code>superfund-search</code> or <code>hammocklab-search</code>.</p>
+
+<p>If you retype <code>ls</code>, you should see all of the project files. As you can see, 
+both biopest and superfund are directories (colored blue). Each one contains the search 
+engine project for the respective database.</p></br>
+
+<p>You can also access these files from Windows 
+Explorer; here is a snapshot of my local project files.</p></br>
+<img class="displayed" src="localfiles.png" style="display:block; margin:auto; width:375px" />
+</br>
+
+<hr></br>
+
+<p>If you accidentally copy the wrong files or copy them to the wrong location, you can
+run the command</p>
+<p style="text-align:center"><code>rm fileName</code></p>
+<p>or</p>
+<p style="text-align:center"><code>rm -rf directoryName</code></p>
+<p>where <code>rm</code> is a shorthand for remove.</p></br>
+
+<p><b>Note that when you delete files using the command line and not Windows explorer, 
+if you mess up and delete the wrong thing you cannot use <code>Ctrl+Z</code>
+to get it back. Be very careful that you want to remove the file you are deleting 
+before you run either of these commands.</b></p></br></br>
+
+<h2 id="five">CREATING/EDITING YOUR DATABASE</h2>
+
+<p>To manage our publications, we use a program called <a href="https://www.citavi.com/" target="blank">
+Citavi</a>. "Citavi is a reference management program for Microsoft Windows published 
+by Swiss Academic Software in Wadenswil, Switzerland" (Wikipedia "Citavi"). In addition 
+to acting as a database for your references,it formats them for you and creates beautiful 
+citations.</p>
+
+<p>However, Citavi is entirely unnecessary to get the project up and running. It is  
+the tool that we have found to be most useful for our needs, but databases can be 
+created in all manner of ways. I spend the next small section talking about Citavi for 
+those who are interested, but if you already have an Excel or CSV database, jump ahead 
+to <a href="#six">Converting Your Database to SQL</a>.<p></br>
+
+<p>The search engine returns results as follows: title first (with the link), then all 
+the rest of the information just below. Citavi creates what are called "Citation keys", 
+shorthand citations that can be used to reference the full ones. Since 
+I am excluding the title from the reference, I use this tool to format the remaining 
+output.</p>
+
+<p>If you use Citavi and want to edit how the Citation keys are formatted, simply open</p>
+<p style="text-align:center"><code>Tools -> Options... Crtl+Oemcomma</code></p>
+<p>This opens a window. Under General, make sure Citation key support is checked, and 
+click on Customize... Under this option you can format your citation keys however you 
+want.</p></br></br>
+
+<p>Citavi allows you to export all/selections of your database into a table or spreadsheet. 
+There is a button along the 
+From there, simply export it further into an Excel spreadsheet. You can also create your 
+database anyway you like. Since we'll eventually be porting it into a SQLite3 database, 
+if you know what you are doing you can skip the Excel step all together. If you already 
+have a SQLite3 database that you want to upload, then skip ahead.</p>
+
+<p>If you go into the project folder you want to edit (using Windows Explorer), you 
+can see all of the files for the project. For both superfund and biopest, I have 
+included both the Excel spreadsheet and its .csv file. The columns I have in 
+sfpub.xlsx are: </p>
+  <blockquote>title, author, keywords, abstract, project_core, year, periodical, citation, 
+  and link. </blockquote>
+<p>The columns in biopestpubs.xlsx are:</p>
+  <blockquote>bibnum, title, author, year, periodical, parent_title, citation, keyword, 
+  project, and link.</blockquote> 
+<p>Likewise,in the generic project I have included a blank Excel sheet with a row 
+of labeled columns.</p></br>
+  
+<p>It is important to note that if you change any of the column names, or add any 
+new columns, you will have to edit the code for the application itself. 
+I will write another walk-through about how to customize the 
+fields of the spreadsheet (and thus your search engine), but for now I am assuming 
+that you aren't changing the spreadsheet beyond adding new elements.</p></br>
+
+<p>If you don't know database management, you can simply add your new rows to the Excel 
+spreadsheet.</p></br>
+
+<p>Another big thing to be aware of is that having carriage returns in any of the 
+cells will mess up this process. I originally ran into this problem with the 
+abstracts in the Superfund database. Some abstracts were formatted like this:</p>
+<blockquote>OBJECTIVE</br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus 
+pretium.</br>
+METHODS</br>
+Morbi magna erat, venenatis ac nunc in, congue laoreet tortor. Donec urna felis, tempor 
+ac sapien quis, venenatis feugiat mi. Fusce at vulputate odio.</br>
+RESULTS</br>
+Mauris sed odio vel purus interdum aliquet a id purus. Fusce et massa sagittis sapien 
+ullamcorper consectetur. Mauris ac varius elit. Phasellus aliquam metus nec semper tempor. 
+Vestibulum iaculis diam ac sagittis ornare.</br>
+CONCLUSIONS</br>
+Morbi scelerisque et magna at ultrices. Donec a est facilisis, semper arcu et, interdum 
+purus.</blockquote>
+
+<p>and created problems with my code. I reformatted each of those abstracts to look 
+like this:</p>
+
+<blockquote>OBJECTIVE: Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Pellentesque volutpat faucibus pretium. METHODS: Morbi magna erat, venenatis ac nunc 
+in, congue laoreet tortor. Donec urna felis, tempor ac sapien quis, venenatis feugiat 
+mi. Fusce at vulputate odio. RESULTS: Mauris sed odio vel purus interdum aliquet a id 
+purus. Fusce et massa sagittis sapien ullamcorper consectetur. Mauris ac varius elit. 
+Phasellus aliquam metus nec semper tempor. Vestibulum iaculis diam ac sagittis ornare.
+CONCLUSIONS: Morbi scelerisque et magna at ultrices. Donec a est facilisis, semper arcu 
+et, interdum purus.</blockquote>
+
+<p>which, while less elegant got the job done. I am planning to figure out how to prevent 
+this from being necessary, but for now don't have any carriage returns in your Excel 
+spreadsheet cells.</p></br>
+
+<p>When you are done adding your new rows to the spreadsheet, move on to the next 
+section. (You can also remove rows, or make duplicates of rows. For example, an 
+article that is published with two different projects will be copied exactly with only the
+project number changed on the duplicate.)</p>
+</br></br>
+
+
+<h2 id="six">CONVERTING YOUR DATABASE TO SQL</h2>
+<p>Now we want to convert our updated Excel spreadsheet to a SQLite3 database. 
+Save a copy of the spreadsheet as a .csv file. When you do this step, your program 
+should open a window asking you what field and text delimiters you want to use. It is 
+<b>hugely important</b> that you tell it that you want a bar ( or | ) as your field delimiter. 
+I use LibreOffice, and this is what my window looks like just before I click 'Okay'.</p>
+</br>
+
+<img class="displayed" src="csv.png" style="display:block; margin:auto; width:375px" />
+</br>
+<p>I am planning on writing a script to convert a csv to a SQLite3 database and upload 
+everything to Heroku for you (for simple database edits), so you don't have to take 
+these steps to change the database. However, until I start/finish that, I just use 
+<a href="http://www.convertcsv.com/csv-to-sql.htm" target="blank">this online tool</a>.  This is what 
+it looks like.</p></br>
+<img class="displayed" src="csvSQL.png" style="display:block; margin:auto; width:700px" />
+</br>
+<p>Where it says <i>Choose CSV files here</i>, upload the .csv file of the edited database. 
+For the rest of the options, I always have my top row of Excel spreadsheets the column 
+names, if you don't, make sure you uncheck that box. Again, for the field separator, it 
+is <b>hugely important</b> to choose Bar-|, because otherwise the database we are building 
+won't resemble our Excel file.</p>
+<p>You can ignore the <i>Sort CSV</i> box. </p></br>
+
+<p>Rename the <i>Table Name</i> to biopest or superfund (depending on which you are 
+editing). It is important to not forget to name it properly, or else the code won't be 
+able to find it. </p></br>
+
+<p>Make sure <i>Create Table</i> is checked, and <i>IF NOT EXISTS</i> right next to it. 
+Likewise, make sure <i>Drop Table</i> and <i>IF EXISTS</i> are both checked.</p></br>
+
+<p>Leave <i>Enclose field names below</i> unchecked, as well as the following two fields.
+</p></br> 
+
+<p>When you get to the table, uncheck any boxes that are checked for <i>Key</i> or 
+<i>Required</i>.</p></br>
+
+<p>Change the convertcsv.sql name to superfund.sql or biopest.sql (again, depending on 
+which one you are editing), then scoll back up the page and hit <i>Convert CSV to SQL 
+Insert</i>, to recreate the code in the bottom box.</p></br>
+
+<p>Right before I click <i>Convert CSV to SQL Insert</i>, my window looks like this:</p>
+</br>
+<img class="displayed" src="csvSQL1.png" style="display:block; margin:auto; width:700px" />
+<img class="displayed" src="csvSQL2.png" style="display:block; margin:auto; width:700px" /></br> 
+
+<p>Now you can either click on Save to Disk, or copy and paste the whole thing out (if you
+do copy and paste, make sure that the file type ends as .sql not .txt).
+Either way, we want it to replace the SQL file in the project folder. So I save 
+superfund.sql back into the folder searchEngine\superfund (Unix shows file paths with 
+forward slashes <code>/</code>; Windows uses backslashes <code>\</code>).</p></br>
+
+<p>Before we move onto the next step of creating the database, you should take a moment
+to check that your .sql file looks the way it should. You can open it up into any 
+text editor you want, my preference is <a href="http://notepad-plus-plus.org/" target="blank">
+Notepad++</a> (pronounced notepad plus plus), but Notepad, WordPad, or even 
+Microsoft Word should work. The first few lines should look something like the following.</p>
+<blockquote style="font-size:.75em">
+DROP TABLE IF EXISTS superfund; </br>
+CREATE TABLE IF NOT EXISTS superfund(</br>
+  title VARCHAR(251)</br>
+, author VARCHAR(899)</br>
+, keywords VARCHAR(1024)</br>
+, abstract VARCHAR(3502)</br>
+, projectcore VARCHAR(6)</br>
+, year INTEGER(4)</br>
+, periodical VARCHAR(138)</br>
+, citation VARCHAR(630)</br>
+, link VARCHAR(89)</br>
+);</br>
+INSERT INTO search(title,author,keywords,abstract,projectcore,year,periodical,citation,link) VALUES ('1-Aryl-3-(1-acylpiperidin-4-yl)urea inhibitors of human and murine soluble epoxide hydrolase: structure-activity relationships, pharmacokinetics, and reduction of inflammatory pain','Rose, Tristan E.; Morisseau, Christophe; Liu, Jun-Yan; Inceoglu, Bora; Jones, Paul D.; Sanborn, James R.; Hammock, Bruce D.','Adamantane/analogs & derivatives/chemical synthesis/pharmacokinetics/pharmacology; Analgesics, Opioid/pharmacology; Animals; Anti-Inflammatory Agents, Non-Steroidal/chemical synthesis/pharmacokinetics/pharmacology; Carrageenan; Epoxide Hydrolases/antagonists & inhibitors; Humans; Male; Mice; Morphine/pharmacology; Pain/chemically induced/drug therapy; Piperidines/chemical synthesis/pharmacokinetics/pharmacology; Rats; Rats, Sprague-Dawley; Solubility; Structure-Activity Relationship; Urea/analogs & derivatives/chemical synthesis/pharmacokinetics/pharmacology','1,3-Disubstituted ureas possessing a piperidyl moiety have been synthesized to investigate their structure-activity relationships as inhibitors of the human and murine soluble epoxide hydrolase (sEH). Oral administration of 13 1-aryl-3-(1-acylpiperidin-4-yl)urea inhibitors in mice revealed substantial improvements in pharmacokinetic parameters over previously reported 1-adamantylurea based inhibitors. For example, 1-(1-(cyclopropanecarbonyl)piperidin-4-yl)-3-(4-(trifluoromethoxy)phenyl)urea (52) showed a 7-fold increase in potency, a 65-fold increase in C(max), and a 3300-fold increase in AUC over its adamantane analogue 1-(1-adamantyl)-3-(1-propionylpiperidin-4-yl)urea (2). This novel sEH inhibitor showed a 1000-fold increase in potency when compared to morphine by reducing hyperalgesia as measured by mechanical withdrawal threshold using the in vivo carrageenan induced inflammatory pain model.','5',2010,'J. Med. Chem. (Journal of medicinal chemistry)','Rose, Morisseau, Liu, Inceoglu, Jones, Sanborn, Hammock. (2010). Journal of medicinal chemistry. 53:7067-7075.','http://ucanr.edu/sites/superfund/files/176289.pdf');</br>
+</br>
+INSERT INTO search(title,author,keywords,abstract,projectcore,year,periodical,citation,link) VALUES ('1-Aryl-3-(1-acylpiperidin-4-yl)urea inhibitors of human and murine soluble epoxide hydrolase: structure-activity relationships, pharmacokinetics, and reduction of inflammatory pain','Rose, Tristan E.; Morisseau, Christophe; Liu, Jun-Yan; Inceoglu, Bora; Jones, Paul D.; Sanborn, James R.; Hammock, Bruce D.','Adamantane/analogs & derivatives/chemical synthesis/pharmacokinetics/pharmacology; Analgesics, Opioid/pharmacology; Animals; Anti-Inflammatory Agents, Non-Steroidal/chemical synthesis/pharmacokinetics/pharmacology; Carrageenan; Epoxide Hydrolases/antagonists & inhibitors; Humans; Male; Mice; Morphine/pharmacology; Pain/chemically induced/drug therapy; Piperidines/chemical synthesis/pharmacokinetics/pharmacology; Rats; Rats, Sprague-Dawley; Solubility; Structure-Activity Relationship; Urea/analogs & derivatives/chemical synthesis/pharmacokinetics/pharmacology','1,3-Disubstituted ureas possessing a piperidyl moiety have been synthesized to investigate their structure-activity relationships as inhibitors of the human and murine soluble epoxide hydrolase (sEH). Oral administration of 13 1-aryl-3-(1-acylpiperidin-4-yl)urea inhibitors in mice revealed substantial improvements in pharmacokinetic parameters over previously reported 1-adamantylurea based inhibitors. For example, 1-(1-(cyclopropanecarbonyl)piperidin-4-yl)-3-(4-(trifluoromethoxy)phenyl)urea (52) showed a 7-fold increase in potency, a 65-fold increase in C(max), and a 3300-fold increase in AUC over its adamantane analogue 1-(1-adamantyl)-3-(1-propionylpiperidin-4-yl)urea (2). This novel sEH inhibitor showed a 1000-fold increase in potency when compared to morphine by reducing hyperalgesia as measured by mechanical withdrawal threshold using the in vivo carrageenan induced inflammatory pain model.','Core A',2010,'J. Med. Chem. (Journal of medicinal chemistry)','Rose, Morisseau, Liu, Inceoglu, Jones, Sanborn, Hammock. (2010). Journal of medicinal chemistry. 53:7067-7075.','http://ucanr.edu/sites/superfund/files/176289.pdf');
+</br> ... </br>
+</blockquote>
+<p>If you notice that each field is not surrounded by single quotes and separated by 
+commas, resembling the above, then you have done something wrong. Go back through the 
+steps under <a href="#six">Converting Your Database to SQL</a>. It is a good idea to look at the 
+last couple of rows too; you might have some mistake halfway through that messes up the 
+end of your database.</p></br>
+
+<p>If it looks correct so far, search for your new rows using <code>Ctrl+F</code> and make 
+sure that they have the right format as well. I am having you check your .sql file instead 
+of the constructed database, because I am assuming that you do not know SQL. This is much
+easier than writing a tutorial for SQLite3. However, if you are interested in learning 
+how to use SQLite (or any other SQL-based database language), there are plenty of great 
+tutorials online.</p></br></br>
+
+<p>Now we want to execute the code to rebuild the edited databases. If you've closed 
+Git Bash, open it back up and <code>cd</code> into the directory where you've stored the 
+project files. So I execute</p>
+<p style="text-align:center"><code>cd Desktop/searchEngine/superfund</code></p></br>
+
+<p>Again, make sure you have sqlite.exe in your project folder or the command
+below won't run. Since I have the updated superfund.sql file here, all I have to run 
+to rebuild the database is</p>
+<p style="text-align:center"><code>cat superfund.sql | sqlite3 superfund.db</code></p></br>
+
+<p>The terminal will pause for a bit while it executes the command, and then that's it! 
+If you have followed the steps converting your Excel spreadsheet to a CSV file to 
+the SQL insert statement properly, then your updated database should be working properly. 
+</p></br>
+
+<p>If you really want to check that your database looks the way it should, you can open 
+your database with the command</p>
+<p style="text-align:center"><code>sqlite3 superfund.db</code></p>
+<p>Then run the following commands:</p>
+<p style="text-align:center"><code>.mode csv</code></p>
+<p style="text-align:center"><code>.output test.csv</code></p>
+<p style="text-align:center"><code>select * from superfund;</code></p>
+<p style="text-align:center"><code>.output stdout</code></p>
+<p style="text-align:center"><code>.exit</code></p></br>
+
+<p>There should now be <code>test.csv</code> in your directory containing the contents of 
+your database. I don't feel like typing out a small SQLite3 tutorial about interacting 
+with your database through the SQLite command line, but again, those are easily 
+available online.</p></br>
+
+<p>Check out test.csv to make sure that your database looks like it should, and then
+we're ready to move on!</p></br></br>
+
+
+
+<h2 id="seven">UPLOADING TO HEROKU</h2>
+
+<p>Congrats! You have made it through all of the tool installations, have gotten a hold of 
+the project files, and updated/edited the database. Now we are ready to commit the 
+changes to Heroku and get our app running on a website!</p></br>
+
+<p>We are just about ready to connect to Heroku and push our app to a web address. 
+However, before we can start deploying our project we must have Heroku login credentials. 
+</p>
+
+<p>Go to the <a href="https://www.heroku.com/" target="blank">Heroku homepage</a> and login, or if
+this is your first time, create your own credentials.</p></br>
+
+<img class="displayed" src="herokuhome.png" style="display:block; margin:auto; width:700px" />
+</br>
+
+<p>When you login you'll be taken to your dashboard, where you will see a list of 
+all of the apps you have created. Naturally, if this is your first time working with 
+Heroku, you won't have any pre-existing apps, and will see the following page</p></br>
+
+<img class="displayed" src="herokudash.png" style="display:block; margin:auto; width:700px" />
+</br>
+
+<p>You can follow the commands that they list for committing your first app, but these 
+are a bit oversimplified and won't actually commit your own app. Instead, let's run 
+a few extra of our own commands to get the search engine up and running.</p></br>
+
+<p>You probably haven't closed Git Bash since completing the last section, but if you 
+have, reopen it and make sure that you are in the project directory. That means 
+actually inside <code>superfund</code> or <code>biopest</code>, not in the parent 
+directory <code>searchEngine</code>. Remember, you can run <code>pwd</code> to have 
+the terminal print out which directory you are in.</p></br>
+
+<p>In order to connect to Heroku and commit our changes, we will first need to login. 
+Run the command</p>
+<p style="text-align:center"><code>heroku login</code></p>
+and enter your Heroku credentials. If this is the first time that you are using Heroku, 
+it is a good idea to make sure that you have an SSH key for your computer. Run the command
+<p style="text-align:center"><code>heroku keys</code></p>
+which will list all of the keys associated to your Heroku account. If you don't see the 
+name of your computer listed, run the command 
+<p style="text-align:center"><code>heroku keys:add</code></p>
+to add one for your machine. You can run <code>heroku keys</code> again to verify that 
+an SSH key for your computer was added properly.</p></br>
+
+If this is your first time using Heroku, you won't have any apps on Heroku and thus no
+repository to connect to. You will need to run the command</p>
+<p style="text-align:center"><code>heroku create</code></p>
+to start a new project. This command creates an empty repository on Heroku. 
+You should get back a statement similar to</p>
+<blockquote style="margin-right:0"><code>Creating secret-ocean-5894... done, stack is cedar</br>
+http://secret-ocean-5894.herokuapp.com/ | git@heroku.com:secret-ocean-5894.git</br>
+Git remote heroku added</code></blockquote>
+
+<p>If you don't like the project name, you can go into your Heroku 
+dashboard and change it under settings. Click on your app name, then on Settings.
+Under Settings you can also delete your app or view its web address. Heroku limits
+the number of free apps to 5 per account, so make sure to delete any old apps you 
+aren't using. If you want to view the SSH keys associated to your account, click 
+on the ninja in the top right and select Account. Likewise, under Access (next to 
+Settings), you can give new users the right to access and edit your project.</p>
+</br>
+
+<hr></br>
+
+<p>If you change the name of your project, then you'll need to update your 
+remote link to Heroku. Run the command 
+<p style="text-align:center"><code>git remote -v</code></p></br>
+<p>which should return the link to your original project name</p>
+<p style="text-align:center"><code>heroku git@heroku.com:secret-ocean-5894.git (fetch)</code></p>
+<p style="text-align:center"><code>heroku git@heroku.com:secret-ocean-5894.git (push)</code></p>
+</br>
+<p>Since we've changed the name, we'll need to change our remote link as well. Back 
+in the terminal, run the command</p>
+<p style="text-align:center"><code>git remote rm heroku</code></p>
+to remove the remote link to Heroku, and then
+<p style="text-align:center"><code>git remote add heroku 
+git@heroku.com:new_project_name.git</code></p>
+<p>where you swap <code>new_project_name</code> for the name of
+your project. You can also find the git address for your project under Settings.</p>
+</br>
+
+<p><b>If you want to connect to an app that is already written, but <code>git remote
+-v</code> doesn't return the correct address, just run the above commands as needed
+until it does.</b></p></br>
+
+<hr></br>
+
+<p>Now that we are connected to our project, we are ready to deploy our project 
+files. Run <code>ls</code> to check if you have a <code>.git</code> file in 
+your project directory. If you are completing this tutorial for the first time, 
+chances are that you will not have one. That's okay, just run </p>
+<p style="text-align:center"><code>git init</code></p>
+<p>You should get back</p>
+<p style="text-align:center"><code>
+Initialized empty Git repository in c:/Users/path/to/directory/
+</code></p>
+<p>where <code>/path/to/directory/</code> is not actually what you will see, but rather 
+the pathname to your current directory.</p></br> 
+
+<p>This creates an empty 
+<a href="http://www.sbf5.com/~cduan/technical/git/git-1.shtml" target="blank">
+Git repository</a>, allowing you to push your files to Heroku and commit the 
+changes.  Rerun <code>ls</code>; you should now see a <code>.git</code> 
+directory in your project directory.</p></br>
+
+<p>In the installation, we should have taken care of Windows replacing the line 
+endings for Linux (LF) with the ones Windows uses (CRLF), but run the following 
+command just to make sure
+<p style="text-align:center"><code>git config core.autocrlf</code></p>
+If it doesn't return false then run 
+<p style="text-align:center"><code>git config core.autocrlf false</code></p>
+</br>
+
+<p>Now we are ready to add our files to the repository. Run the command</p>
+<p style="text-align:center"><code>git add -A</code></p>
+<p>to update the files in your repository. This command will add any file changes 
+to your repository; any new, changed or deleted file will be reflected. </p></br>
+
+<hr></br>
+
+<p>If you ran </p>
+<p style="text-align:center"><code>git add .</code></p>
+<p>you'd add any changes to existing or new files, but ignore any file deletions.
+Running</p>
+<p style="text-align:center"><code>git add -u</code></p>
+<p>only updates existing files and removes deleted ones. It doesn't add new files.</p>
+</br>
+
+<hr></br>
+
+<p>We have to "commit" any changes to our repository before we can push it to Heroku,
+so run the command</p>
+<p style="text-align:center"><code>git commit -m 'message'</code></p>
+<p>where you swap the word <code>message</code> for a quick message about what you 
+are doing. For example,</p>
+<p style="text-align:center"><code>git commit -m 'updating database'</code></p></br>
+
+<p>I don't like having to always enter a message when committing (although is <b>is
+</b> good form), so sometimes I run the following command:
+<p style="text-align:center"><code>git commit --allow-empty-message -m ''</code></p>
+</br>
+
+<p>We're so close! Now that we've committed the changes to our repository, all 
+that remains is to push them out. So run</p>
+<p style="text-align:center"><code>git push heroku master</code></p>
+<p>which should start and end with something like the following output</p>
+<blockquote><code>Initializing repository, done.</br>
+Counting objects: 19, done.</br>
+Delta compression using up to 4 threads.</br>
+Compressing objects: 100% (19/19), 1.05 MiB | 254.00 KiB/s, done.</br>
+Total 19 (delta 3), reused 0 (delta 0)</br></br>
+&nbsp; &#8942;</br></br>
+To git@heroku.com:secret-ocean-5894.git</br>
+ * [new branch]      master -> master
+</code></blockquote></br>
+
+<p>And that's it! You've deployed your app to Heroku! If you've done everything 
+correctly, then you can go to</p>
+<p style="text-align:center"><code>project_name.herokuapp.com</code></p>
+<p>to see your app running! Congrats, you've successfully created/edited your 
+own Heroku app!</p></br>
+
+<hr></br>
+
+<p>As a quick sidenote before we end, if you push your files to Heroku and manage
+to lose them locally, don't worry! You can get them back by just running</p>
+<p style="text-align:center"><code>git clone git@heroku.com:PROJECT_NAME.git directory</code></p>
+</br>
+
+<p>Where you swap <code>PROJECT_NAME</code> for the name of your project, and 
+<code>directory</code> is where you want to copy your files. You can leave out 
+<code>directory</code>, but then git will create a directory named 
+<code>PROJECT_NAME</code> and copy the files into it. (Remember that a single period
+<code>.</code> is a shorthand way to represent the current directory. If you wanted,
+you could also run <code>pwd</code> and copy the long name for your current 
+directory.)</p>
+
+</div>
+</body>
+</html>

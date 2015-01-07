@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><span><h2>{{ entry.bibnum }}. <a href="{{ entry.link }}">{{ entry.title }}</a></h2>
+    <font size="2">{{ entry.citation }}</font></br></span>
+  {% else %}
+    <li><em>Search returned no results.</em>
+  {% endfor %}
+  </ul>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

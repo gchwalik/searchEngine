@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+
+  </br>
+  <div align="center">
+  All of the categories for "Research Category" are listed below.</br></br></br>
+  <table>
+    <tr>
+      <td>
+        <h3>Search by:</h3>  
+      </td>
+    </tr>
+    <tr>
+      <form action="{{ url_for('login') }}" method=post>
+        <td>
+          <select name="choice">
+            <option value="title">Title</option> 
+            <option value="author">Author</option> 
+            <option value="year">Year</option> 
+            <option value="project">Research Category</option> 
+            <option value="keyword">Keyword</option> 
+          </select>
+        </td>
+        <td> 
+          <input type="text" name="search">
+        </td>
+        <td>
+          <input type="submit" value="Submit">
+        </td>
+      </tr>
+    </form>
+  </table>
+  </div>
+
+  </br></br></br>
+
+  <div style="text-align:center">
+    <h3>Categories:</h3></br>
+    <div style="display:inline-block;">
+      <div style="display:inline-block; vertical-align:top; width:160px;  margin:10px 0; ">
+        <div class="images"><a href="/search/project/Epoxide%20Hydrolase">
+          <img style="width:100px;" src="{{ url_for('static', filename='img/EH.png') }}"/>
+        </a></div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px;width:160px;">Epoxide Hydrolase</div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px;">
+          <a href="http://www.biopestlab.ucdavis.edu/files/200198.pdf">pdf</a>
+          &nbsp; &nbsp;
+          <a href="#" class="expander">more/less</a>
+          <div class="content" style="text-align:left;padding-top:10px;font-size:.85em;width:180px;margin-left:10px">
+            <a href="/search/project/Cancer">Cancer</a> &nbsp; 
+              <a href="http://www.biopestlab.ucdavis.edu/files/200179.pdf">pdf</a></br>
+            &nbsp;&nbsp;&nbsp; <i><a href="/search/project/Sorafenib">Sorafenib</a></i>&nbsp; 
+              <a href="http://www.biopestlab.ucdavis.edu/files/200180.pdf">pdf</a></br>
+            <a href="/search/project/Cardiovascular">Cardiovascular</a>&nbsp; 
+              <a href="http://www.biopestlab.ucdavis.edu/files/200181.pdf">pdf</a></br>
+            &nbsp;&nbsp;&nbsp; <i><a href="/search/project/Hypertension">Hypertension</a></i>&nbsp; 
+              <a href="http://www.biopestlab.ucdavis.edu/files/200182.pdf">pdf</a></br>
+            <a href="/search/project/Diabetes">Diabetes</a>&nbsp; 
+              <a href="http://www.biopestlab.ucdavis.edu/files/200183.pdf">pdf</a></br>
+            <a href="/search/project/EH%20Review%20Articles">EH Review Articles</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200184.pdf">pdf</a></br>
+            <a href="/search/project/Eicosanoid%20Biology">Eicosanoid Biology</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200185.pdf">pdf</a></br>
+            <a href="/search/project/Fibrosis">Fibrosis</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200186.pdf">pdf</a></br>
+            &nbsp;&nbsp;&nbsp; <i><a href="/search/project/Atrial%20Fibrosis">Atrial Fibrosis</a></i>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200187.pdf">pdf</a></br>
+            &nbsp;&nbsp;&nbsp; <i><a href="/search/project/Cardiac%20Hypertrophy">Cardiac Hypertrophy</a></i>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200188.pdf">pdf</a></br>
+            &nbsp;&nbsp;&nbsp; <i><a href="/search/project/General%20Fibrosis">General Fibrosis</a></i>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200189.pdf">pdf</a></br>
+            &nbsp;&nbsp;&nbsp; <i><a href="/search/project/Pulmonary%20Indications">Pulmonary Indications</a></i>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200196.pdf">pdf</a></br>
+            <a href="/search/project/Inflammation">Inflammation</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200191.pdf">pdf</a></br>
+            <a href="/search/project/Inhibitor%20Technology">Inhibitor Technology</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200192.pdf">pdf</a></br>
+            <a href="/search/project/Medical%20Chemistry">Medicinal Chemistry</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200193.pdf">pdf</a></br>
+            <a href="/search/project/Pain">Pain</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200194.pdf">pdf</a></br>
+            <a href="/search/project/Renal%20Disease">Renal Disease</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200195.pdf">pdf</a></br>
+          </div>
+        </div>
+      </div>
+      <div style="display:inline-block; vertical-align:top; width:170px; margin:10px 0;">
+        <div class="images"><a href="/search/project/Esterase%20and%20Amidase">
+          <img style="width:100px;" src="{{ url_for('static', filename='img/EA.png') }}"/>
+        </a></div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px; width:170px">Esterase and Amidase</div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px;">
+          <a href="http://www.biopestlab.ucdavis.edu/files/200201.pdf">pdf</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:inline-block;">
+      <div style="display:inline-block; vertical-align:top; width:160px; margin:10px 0;">
+        <div class="images"><a href="/search/project/Immunoassay">
+          <img class="pic" style="width:100px;" src="{{ url_for('static', filename='img/IA.png') }}"/>
+        </a></div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px;width:160px">Immunoassay</div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px;">
+          <a href="http://www.biopestlab.ucdavis.edu/files/200199.pdf">pdf</a>
+          &nbsp; &nbsp;
+          <a href="#" class="expander">more/less</a>
+          <div class="content" style="text-align:left;padding-top:10px;font-size:.85em;margin-left:10px">
+            <a href="/search/project/Nanobodies">Nanobodies</a>&nbsp;
+              <a href="http://www.biopestlab.ucdavis.edu/files/200197.pdf">pdf</a></br>
+          </div>
+        </div>
+      </div>
+      <div style="display:inline-block; vertical-align:top; width:160px; margin:10px 0;">
+        <div class="images"><a href="/search/project/Insect%20Biology">
+          <img style="width:100px;" src="{{ url_for('static', filename='img/IB.png') }}"/>
+        </a></div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px; width:160px">Insect Biology</div>
+        <div style="font-size:.9em;text-align:center; padding-top:5px;">
+          <a href="http://www.biopestlab.ucdavis.edu/files/200200.pdf">pdf</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
